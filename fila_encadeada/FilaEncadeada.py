@@ -10,6 +10,7 @@ class PilhaEncadeada():
         if self.__tamanho == 0:
             self.__inicio = Elemento(info)
             self.__fim = self.__inicio
+            self.__tamanho += 1
         else:
             novo = Elemento(info)
             self.__fim.set_proximo(novo)
