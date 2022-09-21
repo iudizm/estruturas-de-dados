@@ -2,7 +2,7 @@ from Elemento import Elemento
 
 class ListaEncadeada():
     def __init__(self) -> None:
-        self.__cabeca = Elemento(None)
+        self.__cabeca = None
         self.__tamanho = 0
 
     def ultimo_elemento(self):
@@ -19,16 +19,18 @@ class ListaEncadeada():
 # -------
     def insere(self, info, index):
         novo_elemento = Elemento(info)
-        if index == 0:
-            novo_elemento.set_proximo(self.__cabeca)
-            self.__cabeca = novo_elemento
+        if self.__tamanho == 0:
+        	self.__cabeca = novo_elemento
         else:
-            anterior = self.__cabeca
-            for i in range(0, index):
-                anterior = anterior.proximo()
-                i += 1
-            novo_elemento.set_proximo(anterior.proximo())
-            anterior.set_proximo(novo_elemento)
+	        if index == 0:
+	            novo_elemento.set_proximo(self.__cabeca)
+	            self.__cabeca = novo_elemento
+	        else:
+	            anterior = self.__cabeca
+	            for i in range(1, index):
+	                anterior = anterior.proximo()
+	            novo_elemento.set_proximo(anterior.proximo())
+	            anterior.set_proximo(novo_elemento)
         self.__tamanho += 1
 
     def insere_no_fim(self, info):
@@ -73,15 +75,28 @@ class ListaEncadeada():
 
     def cabeca(self):
         return self.__cabeca
-
+        
+    def imprime(self):
+    	array = []
+    	if self.__cabeca:	
+    		c = self.__cabeca
+	    	for i in range(0, self.__tamanho):
+	    		array.append(c.info())
+	    		c = c.proximo()
+	    	print(array)
+    	else:
+    		print("lista vazia")	
 
 lista = ListaEncadeada()
-
-print(lista.tamanho())
-print(lista.ultimo_elemento().info())
+lista.imprime()
 lista.insere_no_fim("oi1")
+lista.imprime()
 lista.insere_no_fim("oi2")
+lista.imprime()
 lista.insere_no_fim("oi3")
+lista.imprime()
 lista.insere_no_comeco("oi no começooo")
+lista.imprime()
 print("tamanho: " + str(lista.tamanho()))
 print("head: " + lista.cabeca().info())
+lista.imprime()
