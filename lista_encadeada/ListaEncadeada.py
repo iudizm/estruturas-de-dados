@@ -17,7 +17,7 @@ class ListaEncadeada():
         pass
 
 # -------
-    def insert(self, info, index):
+    def insere(self, info, index):
         novo_elemento = Elemento(info)
         if index == 0:
             novo_elemento.set_proximo(self.__cabeca)
@@ -31,14 +31,14 @@ class ListaEncadeada():
             anterior.set_proximo(novo_elemento)
         self.__tamanho += 1
 
-    def push_fim(self, info):
-        self.insert(info, self.tamanho())
+    def insere_no_fim(self, info):
+        self.insere(info, self.tamanho())
 
-    def push_comeco(self, info):
-        self.insert(info, 0)
+    def insere_no_comeco(self, info):
+        self.insere(info, 0)
 
 # -------
-    def insert_sorted(self, info):
+    def insere_ordenado(self, info):
         pass
 
 # -------
@@ -53,10 +53,10 @@ class ListaEncadeada():
     def pop(self, index):
         pass
 
-    def pop_fim(self):
+    def pop_do_fim(self):
         self.pop(self.tamanho() - 1)
 
-    def pop_comeco(self):
+    def pop_do_comeco(self):
         self.pop(0)
 
     def remover_elemento_por_info(self, info):
@@ -72,16 +72,16 @@ class ListaEncadeada():
         return self.__tamanho
 
     def cabeca(self):
-        return self.__cabeca        
+        return self.__cabeca
 
 
 lista = ListaEncadeada()
 
 print(lista.tamanho())
 print(lista.ultimo_elemento().info())
-lista.push_fim("oi1")
-lista.push_fim("oi2")
-lista.push_fim("oi3")
-lista.push_comeco("oi no começooo")
-print(lista.tamanho())
-print(lista.cabeca().info())
+lista.insere_no_fim("oi1")
+lista.insere_no_fim("oi2")
+lista.insere_no_fim("oi3")
+lista.insere_no_comeco("oi no começooo")
+print("tamanho: " + str(lista.tamanho()))
+print("head: " + lista.cabeca().info())
