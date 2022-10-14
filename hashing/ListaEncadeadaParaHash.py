@@ -1,4 +1,4 @@
-from Elemento import Elemento
+from ElementoParaHash import Elemento
 
 class ListaEncadeada():
     def __init__(self) -> None:
@@ -19,8 +19,9 @@ class ListaEncadeada():
     def clear(self):
         pass
 
-    def insere(self, info, index):
-        novo_elemento = Elemento(info)
+    #  TO-DO: criar os nós com chave e valor p usar no bucket
+    def insere(self, info, chave, index):
+        novo_elemento = Elemento(info, chave)
         if self.esta_vazia():
             self.__cabeca = novo_elemento
         else:
@@ -35,17 +36,17 @@ class ListaEncadeada():
                 anterior.set_proximo(novo_elemento)
         self.__tamanho += 1
 
-    def insere_no_fim(self, info):
-        self.insere(info, self.tamanho())
+    def insere_no_fim(self, info, chave):
+        self.insere(info, chave, self.tamanho())
 
-    def insere_no_comeco(self, info):
-        self.insere(info, 0)
+    def insere_no_comeco(self, info, chave):
+        self.insere(info, chave, 0)
 
-    def insere_antes_de(self, referencia, info):
-        self.insere(info, self.busca_posicao_por_info(referencia))
+    def insere_antes_de(self, referencia, info, chave):
+        self.insere(info, chave, self.busca_posicao_por_info(referencia))
 
-    def insere_depois_de(self, referencia, info):
-        self.insere(info, (self.busca_posicao_por_info(referencia) + 1))
+    def insere_depois_de(self, referencia, info, chave):
+        self.insere(info, chave, (self.busca_posicao_por_info(referencia) + 1))
 
     def busca_info_por_posicao(self, index):
         if not self.esta_vazia():
@@ -60,6 +61,15 @@ class ListaEncadeada():
         for i in range(0, self.tamanho()):
             if elemento.info() == info:
                 print("encontrado em indice:" + str(i) + "o valor" + info)
+                return i
+            elemento = elemento.proximo()
+        return None
+
+    def busca_posicao_por_chave(self, chave):
+        elemento = self.__cabeca
+        for i in range(0, self.tamanho()):
+            if elemento.chave() == chave:
+                print("encontrado em indice:" + str(i) + "a chave" + chave)
                 return i
             elemento = elemento.proximo()
         return None
@@ -105,3 +115,4 @@ class ListaEncadeada():
             print(array)
         else:
             print("lista vazia")
+
